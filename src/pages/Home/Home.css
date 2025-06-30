@@ -1,0 +1,184 @@
+.Home {
+  padding: 0px 10px;
+  padding-bottom: 100px;
+}
+
+/* Hero Section */
+.hero {
+  max-width: 600px;
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 30px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 4vh, 48px);
+  background: linear-gradient(90deg, #ffffff, #9c39a4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.2;
+}
+
+.hero p {
+  text-align: center;
+  width: 75%;
+  font-size: larger;
+  color: #e3e3e3;
+  line-height: 1.5;
+}
+
+.hero form {
+  display: flex;
+  padding: 8px;
+  background-color: #6f6b6b;
+  width: 80%;
+  border-radius: 10px;
+  font-size: 20px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid black;
+}
+
+.hero form input {
+  border-radius: 7px;
+  flex: 1;
+  font-size: 16px;
+  outline: none;
+  padding-left: 10px;
+  border: 1px solid black;
+  padding: 3px;
+  background-color:;
+}
+
+/* Comic Button */
+.comic-button {
+  display: inline-block;
+  padding: 10px 10px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #9c39a4;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.comic-button:hover {
+  background-color: #fff;
+  color: #9c39a4;
+  border: 2px solid #9c39a4;
+  box-shadow: 5px 5px 0px #9c39a4;
+}
+
+.comic-button:active {
+  background-color: #ffffff;
+  box-shadow: none;
+  transform: translateY(4px);
+}
+
+/* Crypto Table */
+.crypto-table {
+  max-width: 100%;
+  margin: auto;
+  background: linear-gradient(rgba(824, 3, 255, 0.15), rgba(105, 2, 153, 0.15));
+  border-radius: 15px;
+  border: 1px solid #000;
+  overflow-x: auto;
+}
+
+.table-layout {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 1fr 1.5fr;
+  padding: 15px 20px;
+  align-items: center;
+  border-bottom: 1px solid black;
+  gap: 10px;
+  background-color: hsla(0, 0%, 0%, 0.5);
+  border-radius: 10px;
+}
+
+.Market-cap {
+  text-align: right;
+}
+
+.table-layout div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-layout div img {
+  width: 35px;
+}
+
+.positive {
+  color: rgb(40, 202, 40);
+}
+
+.negative {
+  color: rgb(219, 32, 32);
+}
+
+/* ========== Responsive Styles ========== */
+
+@media (max-width: 768px) {
+  .hero {
+    margin: 50px 10px;
+  }
+
+  .hero form {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero form input {
+    width: 100%;
+  }
+
+  .comic-button {
+    width: 100%;
+  }
+
+  .table-layout {
+    grid-template-columns: 1fr 2fr 1fr;
+    font-size: 13px;
+  }
+
+  .hide-on-mobile {
+    display: none;
+  }
+
+  .table-layout div img {
+    width: 25px;
+  }
+
+  .crypto-table {
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .hero p {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .table-layout {
+    grid-template-columns: 1fr 2fr 1fr;
+    padding: 10px;
+    font-size: 12px;
+  }
+}
