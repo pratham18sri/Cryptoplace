@@ -11,7 +11,7 @@ const CoinContextProvider = (props) => {
   const fetchallCoin = async () => {
     const options = {
   method: 'GET',
-  headers: {accept: 'application/json', 'x-cg-demo-api-key': 'CG-cPnhuyiJGxMedFZZzUugeSoi'}
+  headers: {accept: 'application/json', 'x-cg-demo-api-key': 'CG-1REtQ8oVPFEWGXMhMTzYdun2'}
 };
 
     try {
