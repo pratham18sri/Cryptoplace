@@ -47,15 +47,20 @@ const AIChat = () => {
     try {
       const res = await geminiLimiter.execute(() =>
         axios.post(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`,
+          'https://api.openai.com/v1/chat/completions',
           {
-            contents: [{ parts: [{ text: `You are CryptoGPT, an expert cryptocurrency and blockchain assistant. Respond with clear, well-structured markdown. Question: ${q}` }] }],
-          }
+            model: 'gpt-3.5-turbo',
+            messages: [
+              { role: 'system', content: 'You are CryptoGPT, an expert cryptocurrency and blockchain assistant. Respond with clear, well-structured markdown.' },
+              { role: 'user', content: q },
+            ],
+          },
+          { headers: { Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}` } }
         )
       );
 
       const aiText =
-        res?.data?.candidates?.[0]?.content?.parts?.[0]?.text
+        res?.data?.choices?.[0]?.message?.content
         || "I couldn't generate a response. Please try again.";
 
       setMessages(prev => [...prev, { role: 'ai', content: aiText, time: new Date() }]);
@@ -75,7 +80,7 @@ const AIChat = () => {
         return updated;
       });
     } catch (err) {
-      console.error('Gemini API error:', err);
+      console.error('OpenAI API error:', err);
       let errorText = 'Connection error. Please check your internet and try again.';
       const apiMsg = err?.response?.data?.error?.message;
       if (err?.response?.status === 429 || apiMsg?.toLowerCase().includes('quota')) {
