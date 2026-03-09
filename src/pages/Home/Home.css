@@ -1,109 +1,151 @@
+/* ============================================
+   Home Page — Crypto Trading Platform
+   ============================================ */
+
 .Home {
-  padding: 0px 10px;
+  padding: 0 clamp(12px, 3vw, 40px);
   padding-bottom: 100px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* Hero Section */
 .hero {
-  max-width: 600px;
-  margin: 80px auto;
+  max-width: 700px;
+  margin: 80px auto 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 30px;
+  gap: 24px;
+  animation: heroFadeIn 0.8s ease forwards;
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .hero h1 {
-  font-size: clamp(36px, 4vh, 48px);
-  background: linear-gradient(90deg, #ffffff, #9c39a4);
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #a78bfa 50%, #3b82f6 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  line-height: 1.2;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .hero p {
   text-align: center;
-  width: 75%;
-  font-size: larger;
-  color: #e3e3e3;
-  line-height: 1.5;
+  width: 80%;
+  font-size: clamp(14px, 1.8vw, 18px);
+  color: var(--text-secondary);
+  line-height: 1.7;
 }
 
 .hero form {
   display: flex;
-  padding: 8px;
-  background-color: #6f6b6b;
-  width: 80%;
-  border-radius: 10px;
-  font-size: 20px;
-  justify-content: space-between;
+  padding: 6px;
+  background: var(--bg-card);
+  width: 90%;
+  max-width: 520px;
+  border-radius: var(--radius-lg);
+  font-size: 16px;
   align-items: center;
-  gap: 10px;
-  border: 1px solid black;
+  gap: 8px;
+  border: 1px solid var(--border-color);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.hero form:focus-within {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 4px var(--accent-glow);
 }
 
 .hero form input {
-  border-radius: 7px;
+  border-radius: var(--radius-md);
   flex: 1;
-  font-size: 16px;
+  font-size: 15px;
   outline: none;
-  padding-left: 10px;
-  border: 1px solid black;
-  padding: 3px;
-  background-color:;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: "Outfit", sans-serif;
 }
 
-/* Comic Button */
+.hero form input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Search Button */
 .comic-button {
-  display: inline-block;
-  padding: 10px 10px;
-  font-size: 15px;
-  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Outfit", sans-serif;
   text-align: center;
-  text-decoration: none;
   color: #fff;
-  background-color: #9c39a4;
-  border: 2px solid #000;
-  border-radius: 10px;
-  box-shadow: 5px 5px 0px #000;
-  transition: all 0.3s ease;
+  background: var(--accent-gradient);
+  border: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition);
   cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 10px var(--accent-glow);
 }
 
 .comic-button:hover {
-  background-color: #fff;
-  color: #9c39a4;
-  border: 2px solid #9c39a4;
-  box-shadow: 5px 5px 0px #9c39a4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px var(--accent-glow);
 }
 
 .comic-button:active {
-  background-color: #ffffff;
-  box-shadow: none;
-  transform: translateY(4px);
+  transform: translateY(0);
 }
 
 /* Crypto Table */
 .crypto-table {
   max-width: 100%;
-  margin: auto;
-  background: linear-gradient(rgba(824, 3, 255, 0.15), rgba(105, 2, 153, 0.15));
-  border-radius: 15px;
-  border: 1px solid #000;
+  margin: 0 auto 4px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border: 1px solid var(--border-color);
+  border-bottom: none;
   overflow-x: auto;
 }
 
 .table-layout {
   display: grid;
-  grid-template-columns: 0.5fr 2fr 1fr 1fr 1.5fr;
-  padding: 15px 20px;
+  grid-template-columns: 0.4fr 2fr 1fr 1fr 1.5fr;
+  padding: 14px 24px;
   align-items: center;
-  border-bottom: 1px solid black;
-  gap: 10px;
-  background-color: hsla(0, 0%, 0%, 0.5);
-  border-radius: 10px;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.08);
+  gap: 12px;
+  background: var(--bg-card);
+  transition: background var(--transition);
+  font-size: 0.95rem;
+}
+
+.table-layout:hover {
+  background: var(--bg-card-hover);
+}
+
+.crypto-table .table-layout {
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.crypto-table .table-layout:hover {
+  background: var(--bg-card);
 }
 
 .Market-cap {
@@ -113,31 +155,49 @@
 .table-layout div {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .table-layout div img {
-  width: 35px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 }
 
-.positive {
-  color: rgb(40, 202, 40);
+.table-layout div p {
+  font-weight: 500;
 }
 
-.negative {
-  color: rgb(219, 32, 32);
+a.table-layout {
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
 }
 
-/* ========== Responsive Styles ========== */
+a.table-layout:last-child {
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+a.table-layout:first-of-type {
+  border-top: none;
+}
+
+/* ========== Responsive ========== */
 
 @media (max-width: 768px) {
   .hero {
-    margin: 50px 10px;
+    margin: 40px 10px;
+    gap: 20px;
+  }
+
+  .hero p {
+    width: 100%;
   }
 
   .hero form {
     flex-direction: column;
     width: 100%;
+    gap: 8px;
   }
 
   .hero form input {
@@ -146,11 +206,13 @@
 
   .comic-button {
     width: 100%;
+    padding: 12px;
   }
 
   .table-layout {
-    grid-template-columns: 1fr 2fr 1fr;
-    font-size: 13px;
+    grid-template-columns: 0.4fr 2fr 1fr;
+    font-size: 0.85rem;
+    padding: 12px 16px;
   }
 
   .hide-on-mobile {
@@ -158,27 +220,20 @@
   }
 
   .table-layout div img {
-    width: 25px;
-  }
-
-  .crypto-table {
-    border-radius: 10px;
+    width: 26px;
+    height: 26px;
   }
 }
 
 @media (max-width: 480px) {
   .hero h1 {
-    font-size: 24px;
-  }
-
-  .hero p {
-    width: 100%;
-    font-size: 14px;
+    font-size: 28px;
   }
 
   .table-layout {
-    grid-template-columns: 1fr 2fr 1fr;
-    padding: 10px;
-    font-size: 12px;
+    grid-template-columns: 0.4fr 2fr 1fr;
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    gap: 8px;
   }
 }

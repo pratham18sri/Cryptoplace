@@ -18,11 +18,14 @@ const LineChart = ({ historicalData }) => {
 
  const options = {
   title: "Price Trend (Last 10 Days)",
-  hAxis: { title: "Date", textStyle: { color: "#ccc" }, titleTextStyle: { color: "#ccc" } },
-  vAxis: { title: "Price", textStyle: { color: "#ccc" }, titleTextStyle: { color: "#ccc" } },
+  titleTextStyle: { color: "#a78bfa", fontSize: 14, bold: false },
+  hAxis: { title: "Date", textStyle: { color: "#64748b" }, titleTextStyle: { color: "#94a3b8" }, gridlines: { color: "rgba(124,58,237,0.08)" } },
+  vAxis: { title: "Price", textStyle: { color: "#64748b" }, titleTextStyle: { color: "#94a3b8" }, gridlines: { color: "rgba(124,58,237,0.08)" } },
   legend: "none",
-  colors: ["#00ffd5"],
-  backgroundColor: "#121212",
+  colors: ["#7c3aed"],
+  backgroundColor: "transparent",
+  chartArea: { backgroundColor: "transparent", width: "85%", height: "75%", left: "12%", right: "3%", top: "10%", bottom: "12%" },
+  curveType: "function",
 };
 
 
@@ -30,9 +33,10 @@ const LineChart = ({ historicalData }) => {
     <Chart
       chartType="LineChart"
       width="100%"
-      height="500px"
+      height="400px"
       data={data}
       options={options}
+      style={{ maxWidth: '100%' }}
     />
   );
 };

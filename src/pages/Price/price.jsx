@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './price.css';
 import axios from 'axios';
+import { coinGeckoLimiter } from '../../utils/rateLimiter';
 
 const Price = () => {
   const [cryptoData, setCryptoData] = useState([]);
@@ -18,22 +19,29 @@ const Price = () => {
         setLoading(true);
         
         // Fetch global market data
-        const globalResponse = await axios.get('https://api.coingecko.com/api/v3/global');
+        const globalResponse = await coinGeckoLimiter.execute(() =>
+          axios.get('https://api.coingecko.com/api/v3/global', {
+            headers: { 'x-cg-demo-api-key': import.meta.env.VITE_COINGECKO_API_KEY }
+          })
+        );
         setGlobalData(globalResponse.data.data);
         
         // Fetch top 100 cryptocurrencies
-        const cryptoResponse = await axios.get(
-          'https://api.coingecko.com/api/v3/coins/markets',
-          {
-            params: {
-              vs_currency: 'usd',
-              order: 'market_cap_desc',
-              per_page: 100,
-              page: 1,
-              sparkline: true,
-              price_change_percentage: '24h,7d'
+        const cryptoResponse = await coinGeckoLimiter.execute(() =>
+          axios.get(
+            'https://api.coingecko.com/api/v3/coins/markets',
+            {
+              headers: { 'x-cg-demo-api-key': import.meta.env.VITE_COINGECKO_API_KEY },
+              params: {
+                vs_currency: 'usd',
+                order: 'market_cap_desc',
+                per_page: 100,
+                page: 1,
+                sparkline: true,
+                price_change_percentage: '24h,7d'
+              }
             }
-          }
+          )
         );
         
         setCryptoData(cryptoResponse.data);

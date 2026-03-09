@@ -3,6 +3,7 @@ import './Coin.css';
 import { useParams } from 'react-router-dom';
 import { CoinContext } from '../../context/CoinContext';
 import LineChart from '../../components/LineChart/LineChart';
+import { coinGeckoLimiter } from '../../utils/rateLimiter';
 
 const Coin = () => {
   const { coinId } = useParams();
@@ -13,13 +14,15 @@ const Coin = () => {
   const fetchCoinData = async () => {
     const options = {
     method: 'GET',
-    headers: {accept: 'application/json', 'x-cg-demo-api-key': 'CG-cPnhuyiJGxMedFZZzUugeSoi'}
+    headers: {accept: 'application/json', 'x-cg-demo-api-key': import.meta.env.VITE_COINGECKO_API_KEY}
 };
 
     try {
-      const res = await fetch(
-        `https://api.coingecko.com/api/v3/coins/${coinId}`,
-        options
+      const res = await coinGeckoLimiter.execute(() =>
+        fetch(
+          `https://api.coingecko.com/api/v3/coins/${coinId}`,
+          options
+        )
       );
       const data = await res.json();
       setCoinData(data);
@@ -31,13 +34,15 @@ const Coin = () => {
   const fetchHistoricalData = async () => {
       const options = {
     method: 'GET',
-    headers: {accept: 'application/json', 'x-cg-demo-api-key': 'CG-cPnhuyiJGxMedFZZzUugeSoi'}
+    headers: {accept: 'application/json', 'x-cg-demo-api-key': import.meta.env.VITE_COINGECKO_API_KEY}
 };
 
     try {
-      const res = await fetch(
-        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name}&days=10&interval=daily`,
-        options
+      const res = await coinGeckoLimiter.execute(() =>
+        fetch(
+          `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name}&days=10&interval=daily`,
+          options
+        )
       );
       const data = await res.json();
       setHistoricalData(data);
@@ -61,10 +66,6 @@ const Coin = () => {
         <div className="coin-chart">
           <LineChart historicalData={historicalData} />
         </div>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
         <div className='coin-info'>
           <ul>
             <li>Crypto Market Rank</li>
